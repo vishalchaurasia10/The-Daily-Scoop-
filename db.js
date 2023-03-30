@@ -3,7 +3,13 @@ const dotenv = require('dotenv');
 
 dotenv.config({ path: './config.env' })
 
-const mongooseURI = process.env.MONGO_URI;
+let mongooseURI;
+
+if (process.env.NODE_ENV === 'production') {
+    mongooseURI = process.env.MONGO_URI;
+  } else {
+    mongooseURI = process.env.MONGO_URI_DEV;
+  }
 
 mongoose.set('strictQuery', true)
 

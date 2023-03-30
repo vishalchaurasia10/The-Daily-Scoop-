@@ -7,7 +7,7 @@ const router = express.Router()
 router.get('/getBlogs', async (req, res) => {
     try {
         const blogs = await Posts.find()
-        res.status(200).json(blogs)
+        res.status(200).json({totalBlogs : blogs.length , blogs : blogs.slice(0,parseInt(req.query.count))})
     }
     catch (err) {
         res.status(500).json({ error: "Internal Server Error" })
